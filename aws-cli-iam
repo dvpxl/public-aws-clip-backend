@@ -1,0 +1,6 @@
+aws iam create-policy --policy-name YourCustomS3Policy --policy-document path/to/your-policy.json                   # create policy
+aws iam attach-user-policy --user-name your-username --policy-arn arn:aws:iam::your-account-id:policy/your-policy   # attach policy
+
+# generate key
+aws iam create-access-key --user-name your-username    
+
