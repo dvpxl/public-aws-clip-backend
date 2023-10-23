@@ -10,5 +10,25 @@ aws s3 ls
 2023-09-14 22:18:15 jp-<redacted>
 2023-09-14 18:04:59 jp-<redacted>
 2023-09-14 22:21:18 jp-<redacted>
+aws s3 ls s3://bn  # bucket name
+aws s3 cp source-file s3://bn/destination-folder/
+aws s3 cp local-file  s3://bn/
+aws s3 cp s3://bn/remote-file local-file
+aws s3 rm s3://bn/your-object
+aws s3 sync source-folder s3://bn/destination-folder/
 aws s3 mb # make bucket   , ex: aws s3 mb s3://your-bucket-name
 aws s3 rb # remove bucket , ex: aws s3 rb s3://your-bucket-name
+
+# Make public
+aws s3api put-object-acl --bucket your-bucket-name --key your-object --acl public-read
+# Create temp presigned url (temp, secure access to s3 object)
+aws s3 presign s3://your-bucket-name/your-object
+# Enable versioning
+aws s3api put-bucket-versioning --bucket your-bucket-name --versioning-configuration Status=Enabled
+# List object verseions
+aws s3api list-object-versions --bucket your-bucket-name
+# Delete specific object versions
+aws s3api delete-object --bucket your-bucket-name --key your-object --version-id your-version-id
+
+# Fast Transfer using Transfer Acceleration
+aws s3 cp local-file s3://your-bucket-name/ --endpoint-url https://your-bucket-name.s3-accelerate.amazonaws.com
